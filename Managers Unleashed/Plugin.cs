@@ -1,6 +1,7 @@
 ﻿namespace Managers_Unleashed
 {
     using BepInEx;
+    using BepInEx.Configuration;
     using BepInEx.Logging;
     using Game.Actors.Stats;
     using Game.Actors.Urban.Buildings;
@@ -10,10 +11,15 @@
     public class Plugin : BaseUnityPlugin
     {
         internal static new ManualLogSource Logger { get; private set; }
+        internal static ConfigEntry<bool> needMinistersAssigned;
+        internal static ConfigEntry<bool> autoUpgradeBuildings;
 
         private void Awake()
         {
             Logger = base.Logger;
+
+            needMinistersAssigned = Config.Bind("General", "NeedMinistersAssigned", true, "Need ministers assigned for buildings to be built.");
+            autoUpgradeBuildings = Config.Bind("General", "AutoUpgradeBuildings", false, "Automatically upgrade buildings when possible.");
 
             // Harmony patching
             Harmony.CreateAndPatchAll(typeof(Plugin), MyPluginInfo.PLUGIN_GUID);
@@ -37,5 +43,29 @@
                 __instance.onSlotUnlocked(statType);
             }
         }
+
+        [HarmonyPatch(typeof(EmploymentCenterActor), nameof(EmploymentCenterActor.UpdateMinistersSystem)), HarmonyPrefix]
+        public static bool UpdateMinistersSystem_Prefix(EmploymentCenterActor __instance, float timeDelta)
+        {
+            if (needMinistersAssigned.Value)
+                return true;
+
+            __instance.ministersSlotsTypes.ForEach(x => __instance.ministersSystem.UpdateTimer(x, timeDelta));
+            return false;
+        }
+
+        [HarmonyPatch(typeof(BuildingActor), nameof(BuildingActor.OnTick)), HarmonyPostfix]
+        public static void OnTick_Postfix(BuildingActor __instance)
+        {
+            if (!autoUpgradeBuildings.Value || !__instance.IsUpgradeReady)
+                return;
+
+            __instance.UpgradeBuilding();
+            if (__instance.Planet.GameTipsController.OnDoUpgradeButtonPressed != null)
+            {
+                __instance.Planet.GameTipsController.OnDoUpgradeButtonPressed(__instance);
+            }
+        }
+
     }
 }
