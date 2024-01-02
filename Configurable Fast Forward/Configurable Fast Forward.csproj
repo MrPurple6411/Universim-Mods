@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>Configurable_Fast_Forward</AssemblyName>
+		<Product>Configurable Fast Forward</Product>
+		<Description>Allows you to configure how fast the 2 fast forward settings make things go.</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+	
+</Project>

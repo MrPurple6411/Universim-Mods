@@ -1,0 +1,67 @@
+<Project>
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<TargetFramework>netstandard20</TargetFramework>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<RestoreAdditionalProjectSources>
+			https://nuget.bepinex.dev/v3/index.json
+		</RestoreAdditionalProjectSources>
+		<LangVersion>11</LangVersion>
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+	<ItemDefinitionGroup>
+		<PackageReference ExcludeAssets="runtime" />
+		<Reference>
+			<Private>false</Private>
+		</Reference>
+	</ItemDefinitionGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="BepInEx.Analyzers" Version="1.0.*" PrivateAssets="all" />
+		<PackageReference Include="BepInEx.Core" Version="5.4.*" />
+		<PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.*" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="UnityEngine.Modules" Version="2019.4.31" IncludeAssets="compile" />
+		<PackageReference Include="PolySharp" Version="1.13.*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Assembly-CSharp">
+			<HintPath>..\..\Dependencies\Assembly-CSharp.dll</HintPath>
+		</Reference>
+		<Reference Include="Assembly-CSharp-firstpass">
+			<HintPath>..\..\Dependencies\Assembly-CSharp-firstpass.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Addressables">
+			<HintPath>..\..\Dependencies\Unity.Addressables.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Burst">
+			<HintPath>..\..\Dependencies\Unity.Burst.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Collections">
+			<HintPath>..\..\Dependencies\Unity.Collections.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Jobs">
+			<HintPath>..\..\Dependencies\Unity.Jobs.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Mathematics">
+			<HintPath>..\..\Dependencies\Unity.Mathematics.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.ResourceManager">
+			<HintPath>..\..\Dependencies\Unity.ResourceManager.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.TextMeshPro">
+			<HintPath>..\..\Dependencies\Unity.TextMeshPro.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UI">
+			<HintPath>..\..\Dependencies\UnityEngine.UI.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+	</ItemGroup>
+
+</Project>
