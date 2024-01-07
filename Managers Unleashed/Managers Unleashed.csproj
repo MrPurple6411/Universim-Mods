@@ -4,7 +4,7 @@
 		<AssemblyName>Managers_Unleashed</AssemblyName>
 		<Product>Managers Unleased</Product>
 		<Description>Unlocks all managers as soon as the town hall is built.</Description>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 	
 </Project>

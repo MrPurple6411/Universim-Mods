@@ -3,9 +3,17 @@
     using BepInEx;
     using BepInEx.Configuration;
     using BepInEx.Logging;
+    using Game.Actors;
     using Game.Actors.Stats;
     using Game.Actors.Urban.Buildings;
+    using Game.Configs;
+    using Game.Planet;
+    using Game.UI;
     using HarmonyLib;
+    using System.Collections.Generic;
+    using System.Text;
+    using UnityEngine;
+    using Utils.General;
 
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
@@ -67,5 +75,26 @@
             }
         }
 
+        [HarmonyPatch(typeof(Messages), nameof(Messages.MinisterBuildingMessage)), HarmonyPrefix]
+        public static bool MinisterBuildingMessage_Prefix(Messages __instance, BuildingStatType ministerSlot, ConstructionSiteActor building, NewsConfig.Data.Trigger trigger)
+        {
+            if (needMinistersAssigned.Value)
+                return true;
+
+            Dictionary<string, GameObject> dictionary = new Dictionary<string, GameObject>();
+            Dictionary<string, string> dictionary2 = new Dictionary<string, string>();
+            StringBuilder stringBuilder = new StringBuilder("MinisterJob/");
+            stringBuilder.Append(ministerSlot.ToString().ToUpper());
+            EmploymentCenterActor employmentCenterActor = MonoSingleton<PlanetInfo>.Instance.PlanetActor.SettlementController.GetBuildingsOfType(BuildingConfig.Data.Type.EmploymentCenter)[0] as EmploymentCenterActor;
+            string text = stringBuilder.ToString().TranslateText();
+            dictionary2.Add("#Minister_Slot_Name", text);
+            dictionary.Add(text, employmentCenterActor.GetNuggetAt(0).Display.Transform.gameObject);
+            string text2 = building.BuildingConfig.GetCurrentLevelStats(-1).TranslationKey_Name.TranslateText();
+            dictionary2.Add("#Building_Name", text2);
+            dictionary.Add(text2, building.Display.Transform.gameObject);
+            NewsController.Instance.NewMessage(trigger, null, dictionary2, dictionary, null, DamageSourceTypes.Unknown);
+
+            return false;
+        }
     }
 }
