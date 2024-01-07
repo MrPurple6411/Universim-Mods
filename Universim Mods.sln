@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Instant Research", "Instant
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configurable Fast Forward", "Configurable Fast Forward\Configurable Fast Forward.csproj", "{C184B0B6-2DEC-43BA-BAD2-EB48DCF6A7B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Research Warning Begone", "Research Warning Begone\Research Warning Begone.csproj", "{26D44294-D290-4AF5-9699-25FBF247DFAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Research Warning Begone", "Research Warning Begone\Research Warning Begone.csproj", "{26D44294-D290-4AF5-9699-25FBF247DFAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inexhaustible Underground Resources", "Inexhaustible Underground Resources\Inexhaustible Underground Resources.csproj", "{849C4885-7390-4510-8746-FD45E79DB651}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{26D44294-D290-4AF5-9699-25FBF247DFAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26D44294-D290-4AF5-9699-25FBF247DFAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26D44294-D290-4AF5-9699-25FBF247DFAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{849C4885-7390-4510-8746-FD45E79DB651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{849C4885-7390-4510-8746-FD45E79DB651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{849C4885-7390-4510-8746-FD45E79DB651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{849C4885-7390-4510-8746-FD45E79DB651}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
