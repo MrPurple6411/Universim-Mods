@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>Research_Warning_Begone</AssemblyName>
+		<Product>Research Warning Begone</Product>
+		<Description>Simply Disables the warning when not researching anything.</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+	
+</Project>

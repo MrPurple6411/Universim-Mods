@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34302.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Managers Unleashed", "Managers Unleashed\Managers Unleashed.csproj", "{20E7E7CB-A1E6-4CEF-9709-F0B63DE9FAC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Managers Unleashed", "Managers Unleashed\Managers Unleashed.csproj", "{20E7E7CB-A1E6-4CEF-9709-F0B63DE9FAC5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BA157981-7F68-4384-9BA7-06F019B30287}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,9 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.targets = Directory.Build.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instant Research", "Instant Research\Instant Research.csproj", "{B419D3DF-4ECC-438D-A09D-F52623D1FD95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Instant Research", "Instant Research\Instant Research.csproj", "{B419D3DF-4ECC-438D-A09D-F52623D1FD95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configurable Fast Forward", "Configurable Fast Forward\Configurable Fast Forward.csproj", "{C184B0B6-2DEC-43BA-BAD2-EB48DCF6A7B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configurable Fast Forward", "Configurable Fast Forward\Configurable Fast Forward.csproj", "{C184B0B6-2DEC-43BA-BAD2-EB48DCF6A7B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Research Warning Begone", "Research Warning Begone\Research Warning Begone.csproj", "{26D44294-D290-4AF5-9699-25FBF247DFAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C184B0B6-2DEC-43BA-BAD2-EB48DCF6A7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C184B0B6-2DEC-43BA-BAD2-EB48DCF6A7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C184B0B6-2DEC-43BA-BAD2-EB48DCF6A7B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26D44294-D290-4AF5-9699-25FBF247DFAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26D44294-D290-4AF5-9699-25FBF247DFAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26D44294-D290-4AF5-9699-25FBF247DFAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26D44294-D290-4AF5-9699-25FBF247DFAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
