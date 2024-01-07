@@ -3,6 +3,7 @@
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using Game.Services;
 using Game.UI;
 using HarmonyLib;
 using UnityEngine;
@@ -76,7 +77,7 @@ public class Plugin : BaseUnityPlugin
         Log.LogDebug($"Original Fast forward speed: {dSpeed}");
         Log.LogDebug($"Original Fast forward speed 2: {qSpeed}");
 
-        _pauseSpeed = Instance.Config.Bind(MyPluginInfo.PLUGIN_NAME, "0_PauseSpeed", pSpeed, "Pause speed");
+        _pauseSpeed = Instance.Config.Bind(MyPluginInfo.PLUGIN_NAME, "0_Pause", pSpeed, "Pause");
         _pauseSpeed.SettingChanged += (sender, args) =>
         {
             if (MonoSingleton<UIController>.Instance != null)
@@ -88,7 +89,7 @@ public class Plugin : BaseUnityPlugin
             }
         };
 
-        _normalSpeed = Instance.Config.Bind(MyPluginInfo.PLUGIN_NAME, "1_NormalSpeed", nSpeed, "Normal speed");
+        _normalSpeed = Instance.Config.Bind(MyPluginInfo.PLUGIN_NAME, "1_Normal", nSpeed, "Normal");
         _normalSpeed.SettingChanged += (sender, args) =>
         {
             if (MonoSingleton<UIController>.Instance != null)
@@ -100,7 +101,7 @@ public class Plugin : BaseUnityPlugin
             }
         };
 
-        _fastForwardSpeed = Instance.Config.Bind(MyPluginInfo.PLUGIN_NAME, "2_FastForwardSpeed", dSpeed, "Fast forward speed");
+        _fastForwardSpeed = Instance.Config.Bind(MyPluginInfo.PLUGIN_NAME, "2_FastForward", dSpeed, "Fast Forward");
         _fastForwardSpeed.SettingChanged += (sender, args) =>
         {
             if (MonoSingleton<UIController>.Instance != null)
@@ -112,7 +113,7 @@ public class Plugin : BaseUnityPlugin
             }
         };
 
-        _fastForwardSpeed2 = Instance.Config.Bind(MyPluginInfo.PLUGIN_NAME, "3_FastForwardSpeed2", qSpeed, "Fast forward speed 2");
+        _fastForwardSpeed2 = Instance.Config.Bind(MyPluginInfo.PLUGIN_NAME, "3_DoubleFastForward", qSpeed, "Double Fast Forward");
         _fastForwardSpeed2.SettingChanged += (sender, args) =>
         {
             if (MonoSingleton<UIController>.Instance != null)
@@ -124,13 +125,13 @@ public class Plugin : BaseUnityPlugin
             }
         };
 
-        _pauseOnQuests = Instance.Config.Bind(MyPluginInfo.PLUGIN_NAME, "4_PauseOnQuests", true, "Pause game when a quest is available");
+        _pauseOnQuests = Instance.Config.Bind(MyPluginInfo.PLUGIN_NAME, "4_PauseOnQuests", false, "Pause game when a quest is available");
         _pauseOnQuests.SettingChanged += (sender, args) =>
         {
             Log.LogDebug($"Pause on quests changed to {_pauseOnQuests.Value}");
         };
 
-        _speedPulseHotkey = Instance.Config.Bind(MyPluginInfo.PLUGIN_NAME, "5_SpeedPulseHotkey", KeyCode.V, "Hotkey to pulse Fast Forward speed 2");
+        _speedPulseHotkey = Instance.Config.Bind(MyPluginInfo.PLUGIN_NAME, "5_SpeedPulseHotkey", KeyCode.V, "Hotkey to pulse Double Fast Forward while pressed");
         _speedPulseHotkey.SettingChanged += (sender, args) =>
         {
             Log.LogDebug($"Speed pulse hotkey changed to {_speedPulseHotkey.Value}");
