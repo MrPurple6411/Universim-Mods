@@ -7,6 +7,8 @@ using Game.Research;
 using Game.Sound;
 using Game.UI;
 using HarmonyLib;
+using System.Collections;
+using UnityEngine;
 
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 public class Plugin : BaseUnityPlugin
@@ -28,12 +30,26 @@ public class Plugin : BaseUnityPlugin
         Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
     }
 
+    private IEnumerator Start()
+    {
+        while (true)
+        {
+
+
+            yield return new WaitForSecondsRealtime(1f);
+        }
+    }
+
     [HarmonyPatch(typeof(ResearchController), nameof(ResearchController.StartResearch))]
     [HarmonyPostfix]
     public static void GetAvailableManagers_Postfix(ResearchController __instance, Perk perk)
     {
         if (clicked || !_instantResearch.Value || __instance.CurrentResearch == null)
-         return;
+        {
+            if (!_instantResearch.Value)
+                Logger.LogInfo("Instant research disabled");
+            return;
+        }
 
         __instance.CompleteCurrentResearch();
     }
@@ -45,6 +61,7 @@ public class Plugin : BaseUnityPlugin
     {
         if (!_instantResearch.Value || __instance._researchController.PerkQueue.Count >= __instance.queueSlots.Length)
         {
+            Logger.LogInfo("Instant research disabled");
             return true;
         }
         clicked = true;
