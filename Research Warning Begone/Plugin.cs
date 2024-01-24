@@ -2,6 +2,7 @@
 
 using BepInEx;
 using BepInEx.Logging;
+using Game.Audio;
 using Game.UI;
 using HarmonyLib;
 
@@ -21,8 +22,10 @@ public class Plugin : BaseUnityPlugin
         Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
     }
 
-    [HarmonyPatch(typeof(MainHud), nameof(MainHud.UpdateUnActivityResearchMessage)),HarmonyPrefix]
-    public static bool UpdateUnActivityResearchMessage_Prefix()
+    [HarmonyPatch(typeof(MainHud), nameof(MainHud.OnResearchInactive))]
+    [HarmonyPatch(typeof(TrackWrapperResearchInactive), nameof(TrackWrapperResearchInactive.OnResearchInactive))]
+    [HarmonyPrefix]
+    public static bool OnResearchInactive_Prefix()
     {
         return false;
     }
