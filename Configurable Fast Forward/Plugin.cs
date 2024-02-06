@@ -3,6 +3,7 @@
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using Game;
 using Game.Services;
 using Game.UI;
 using HarmonyLib;
@@ -28,6 +29,9 @@ public class Plugin : BaseUnityPlugin
 
     private void Awake()
     {
+        if (!Analytics.AnalyticsDisabled)
+            Analytics.DisableAnalytics();
+
         // Harmony patching
         Harmony.CreateAndPatchAll(typeof(Plugin), MyPluginInfo.PLUGIN_GUID);
 

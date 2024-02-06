@@ -1,19 +1,31 @@
 ﻿namespace Inexhaustible_Underground_Resources;
 
 using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using Game;
-using Game.Actors.Urban.Buildings;
 using HarmonyLib;
+using System.Diagnostics;
+using System.Text;
+using UnityEngine;
 
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 public class Plugin : BaseUnityPlugin
 {
     internal static new ManualLogSource Logger { get; private set; }
 
+    private static ConfigEntry<bool> _inexhaustibleResources;
+    private static ConfigEntry<bool> _abundantResources;
+
     private void Awake()
     {
+        if (!Analytics.AnalyticsDisabled)
+            Analytics.DisableAnalytics();
+
         Logger = base.Logger;
+
+        _inexhaustibleResources = Config.Bind("General", "InexhaustibleResources", true, "Inexhaustible resources (Makes it so resources never run out)");
+        _abundantResources = Config.Bind("General", "AbundantResources", false, "Abundant resources (Makes it so planets have HUGE quantities of resources)");
 
         // Harmony patching
         Harmony.CreateAndPatchAll(typeof(Plugin), MyPluginInfo.PLUGIN_GUID);
@@ -22,15 +34,28 @@ public class Plugin : BaseUnityPlugin
         Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
     }
 
-    [HarmonyPatch(typeof(MineActor), nameof(MineActor.SubtractResource)), HarmonyPrefix]
-    public static bool SubtractResource_Prefix(MineActor __instance, ref int __result)
+    // Prefix to make resources abundant
+    [HarmonyPatch(typeof(UndergroundResourceLayer), nameof(UndergroundResourceLayer.InitResources)), HarmonyPostfix]
+    public static void InitResources_Postfix(UndergroundResourceLayer __instance)
     {
-        if (__instance._depositLayer == null || __instance._depositsIndexes == null)
-        {
-            return true;
-        }
+        if (!_abundantResources.Value)
+            return;
 
-        __result = 0;
+        for (int i = 0; i < __instance.resources.Length; i++)
+        {
+            __instance.FillResource(i);
+        }
+    }
+
+    // Prefix to make resources inexhaustible
+    [HarmonyPatch(typeof(UndergroundResourceLayer), nameof(UndergroundResourceLayer.SubtractResource)), HarmonyPrefix]
+    public static bool SubtractResource_Prefix(UndergroundResourceLayer __instance, int nodeIndex, int remaining, ref int __result)
+    {
+        // Log what methods called this method
+        if (new StackTrace().ToString().Contains("Cracker") || !_inexhaustibleResources.Value)
+            return true;
+
+        __result = remaining - Mathf.Min(remaining, __instance.resources[nodeIndex]);
         return false;
     }
 }

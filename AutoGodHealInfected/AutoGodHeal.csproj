@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>AutoGodHeal</AssemblyName>
+		<Product>Auto God Heal</Product>
+		<Description>Automatically triggers god healing when Citizen is infected if infection can be healed.</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+	
+</Project>

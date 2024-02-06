@@ -17,9 +17,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configurable Fast Forward",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Research Warning Begone", "Research Warning Begone\Research Warning Begone.csproj", "{26D44294-D290-4AF5-9699-25FBF247DFAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inexhaustible Underground Resources", "Inexhaustible Underground Resources\Inexhaustible Underground Resources.csproj", "{849C4885-7390-4510-8746-FD45E79DB651}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inexhaustible Underground Resources", "Inexhaustible Underground Resources\Inexhaustible Underground Resources.csproj", "{849C4885-7390-4510-8746-FD45E79DB651}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configurable Building Decay", "Configurable Building Decay\Configurable Building Decay.csproj", "{83794508-2CC8-432B-921C-705C7A24E1A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configurable Building Decay", "Configurable Building Decay\Configurable Building Decay.csproj", "{83794508-2CC8-432B-921C-705C7A24E1A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoGodHeal", "AutoGodHealInfected\AutoGodHeal.csproj", "{7B85DF5E-3D0B-4209-9690-8F2D1C981EAB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EraChangeConfirmationRemoval", "EraChangeConfirmationRemoval\EraChangeConfirmationRemoval.csproj", "{EBF6EEE0-C891-4152-9D2F-12FBA54A5BB7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neverwinter", "Neverwinter\Neverwinter.csproj", "{6B943F61-A3A5-4573-80DC-82655ADFD3A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiantHugePlanets", "GiantHugePlanets\GiantHugePlanets.csproj", "{12B694D1-13B4-4498-A7BD-7E00B8E3F32C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inexhaustible Unobtanium", "Inexhaustible Unobtanium\Inexhaustible Unobtanium.csproj", "{EB3642B8-2AB6-44C7-AA43-4A598D9CC948}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speed", "Speed\Speed.csproj", "{BC184243-1BC9-4194-8639-A0BFD5C8FECD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +63,30 @@ Global
 		{83794508-2CC8-432B-921C-705C7A24E1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83794508-2CC8-432B-921C-705C7A24E1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83794508-2CC8-432B-921C-705C7A24E1A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B85DF5E-3D0B-4209-9690-8F2D1C981EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B85DF5E-3D0B-4209-9690-8F2D1C981EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B85DF5E-3D0B-4209-9690-8F2D1C981EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B85DF5E-3D0B-4209-9690-8F2D1C981EAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBF6EEE0-C891-4152-9D2F-12FBA54A5BB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF6EEE0-C891-4152-9D2F-12FBA54A5BB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF6EEE0-C891-4152-9D2F-12FBA54A5BB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF6EEE0-C891-4152-9D2F-12FBA54A5BB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B943F61-A3A5-4573-80DC-82655ADFD3A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B943F61-A3A5-4573-80DC-82655ADFD3A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B943F61-A3A5-4573-80DC-82655ADFD3A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B943F61-A3A5-4573-80DC-82655ADFD3A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12B694D1-13B4-4498-A7BD-7E00B8E3F32C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12B694D1-13B4-4498-A7BD-7E00B8E3F32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12B694D1-13B4-4498-A7BD-7E00B8E3F32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12B694D1-13B4-4498-A7BD-7E00B8E3F32C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB3642B8-2AB6-44C7-AA43-4A598D9CC948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB3642B8-2AB6-44C7-AA43-4A598D9CC948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB3642B8-2AB6-44C7-AA43-4A598D9CC948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB3642B8-2AB6-44C7-AA43-4A598D9CC948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC184243-1BC9-4194-8639-A0BFD5C8FECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC184243-1BC9-4194-8639-A0BFD5C8FECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC184243-1BC9-4194-8639-A0BFD5C8FECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC184243-1BC9-4194-8639-A0BFD5C8FECD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

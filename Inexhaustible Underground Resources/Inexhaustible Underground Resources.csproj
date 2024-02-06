@@ -4,7 +4,7 @@
 		<AssemblyName>Inexhaustible_Underground_Resources</AssemblyName>
 		<Product>Inexhaustible Underground Resources</Product>
 		<Description>Resource Layers are not reduced by mines.</Description>
-		<Version>1.0.0</Version>
+		<Version>1.0.2</Version>
 	</PropertyGroup>
 	
 </Project>

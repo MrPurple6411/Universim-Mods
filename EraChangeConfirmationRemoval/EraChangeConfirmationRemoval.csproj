@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>EraChangeConfirmationRemoval</AssemblyName>
+		<Product>Era Change Confirmation Removal</Product>
+		<Description>YES I WANT TO BUILD FROM THAT ERA!!!!!!! Stop asking me damnit!</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+	
+</Project>

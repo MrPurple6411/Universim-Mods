@@ -1,9 +1,7 @@
-﻿namespace Research_Warning_Begone;
+﻿namespace EraChangeConfirmationRemoval;
 
 using BepInEx;
 using BepInEx.Logging;
-using Game;
-using Game.Audio;
 using Game.UI;
 using HarmonyLib;
 
@@ -14,9 +12,6 @@ public class Plugin : BaseUnityPlugin
 
     private void Awake()
     {
-        if (!Analytics.AnalyticsDisabled)
-            Analytics.DisableAnalytics();
-
         Logger = base.Logger;
 
         // Harmony patching
@@ -26,11 +21,10 @@ public class Plugin : BaseUnityPlugin
         Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
     }
 
-    [HarmonyPatch(typeof(MainHud), nameof(MainHud.OnResearchInactive))]
-    [HarmonyPatch(typeof(TrackWrapperResearchInactive), nameof(TrackWrapperResearchInactive.OnResearchInactive))]
-    [HarmonyPrefix]
-    public static bool OnResearchInactive_Prefix()
+    [HarmonyPatch(typeof(BuildingEraToggle), nameof(BuildingEraToggle.AskIfChangingResidentialBuildingsEra)), HarmonyPrefix]
+    public static bool AskIfChangingResidentialBuildingsEra_Prefix(BuildingEraToggle __instance)
     {
+        __instance.ConfirmChangingResidentialBuildingsEra();
         return false;
     }
 }

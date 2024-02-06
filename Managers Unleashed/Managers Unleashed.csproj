@@ -2,9 +2,10 @@
 
 	<PropertyGroup>
 		<AssemblyName>Managers_Unleashed</AssemblyName>
+		<RootNamespace>Managers_Unleashed</RootNamespace>
 		<Product>Managers Unleashed</Product>
 		<Description>Unlocks all managers as soon as the town hall is built.</Description>
-		<Version>1.0.2</Version>
+		<Version>1.0.3</Version>
 	</PropertyGroup>
 	
 </Project>

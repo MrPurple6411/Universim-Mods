@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>GiantHugePlanets</AssemblyName>
+		<Product>Giant Huge Planets</Product>
+		<Description>Makes the home planet double the radius when selecting Huge size</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+	
+</Project>

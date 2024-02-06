@@ -3,6 +3,7 @@
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using Game;
 using Game.Actors.Urban.Buildings;
 using HarmonyLib;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ public class Plugin : BaseUnityPlugin
 
     private void Awake()
     {
+        if (!Analytics.AnalyticsDisabled)
+            Analytics.DisableAnalytics();
+
         Logger = base.Logger;
 
         // Plugin settings

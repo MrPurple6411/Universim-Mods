@@ -3,22 +3,24 @@
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using Game;
 using Game.Research;
 using Game.Sound;
 using Game.UI;
 using HarmonyLib;
-using System.Collections;
-using UnityEngine;
 
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 public class Plugin : BaseUnityPlugin
 {
     internal static new ManualLogSource Logger { get; private set; }
 
-    internal static ConfigEntry<bool> _instantResearch;
+    private static ConfigEntry<bool> _instantResearch;
 
     private void Awake()
     {
+        if (!Analytics.AnalyticsDisabled)
+            Analytics.DisableAnalytics();
+
         Logger = base.Logger;
 
         _instantResearch = Config.Bind("General", "InstantResearch", true, "Instantly complete researches");
@@ -30,24 +32,12 @@ public class Plugin : BaseUnityPlugin
         Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
     }
 
-    private IEnumerator Start()
-    {
-        while (true)
-        {
-
-
-            yield return new WaitForSecondsRealtime(1f);
-        }
-    }
-
     [HarmonyPatch(typeof(ResearchController), nameof(ResearchController.StartResearch))]
     [HarmonyPostfix]
     public static void GetAvailableManagers_Postfix(ResearchController __instance, Perk perk)
     {
         if (clicked || !_instantResearch.Value || __instance.CurrentResearch == null)
         {
-            if (!_instantResearch.Value)
-                Logger.LogInfo("Instant research disabled");
             return;
         }
 
@@ -61,7 +51,6 @@ public class Plugin : BaseUnityPlugin
     {
         if (!_instantResearch.Value || __instance._researchController.PerkQueue.Count >= __instance.queueSlots.Length)
         {
-            Logger.LogInfo("Instant research disabled");
             return true;
         }
         clicked = true;

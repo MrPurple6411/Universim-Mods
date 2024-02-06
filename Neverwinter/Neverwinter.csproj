@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>Neverwinter</AssemblyName>
+		<Product>Neverwinter</Product>
+		<Description>Automatically skips winter.</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+	
+</Project>

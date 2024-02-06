@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>Speed</AssemblyName>
+		<Product>Speed</Product>
+		<Description>Junk Debugging mod made to allow me to build anything quickly for testing.</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+	
+</Project>

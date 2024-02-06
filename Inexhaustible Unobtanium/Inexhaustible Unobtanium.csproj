@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>Inexhaustible_Unobtanium</AssemblyName>
+		<Product>Inexhaustible Unobtanium</Product>
+		<Description>Unobtanium Extractors are inexhaustible.</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+	
+</Project>

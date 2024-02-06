@@ -3,6 +3,7 @@
     using BepInEx;
     using BepInEx.Configuration;
     using BepInEx.Logging;
+    using Game;
     using Game.Actors;
     using Game.Actors.Stats;
     using Game.Actors.Urban.Buildings;
@@ -24,6 +25,9 @@
 
         private void Awake()
         {
+            if (!Analytics.AnalyticsDisabled)
+                Analytics.DisableAnalytics();
+
             Logger = base.Logger;
 
             needMinistersAssigned = Config.Bind("General", "NeedMinistersAssigned", true, "Need ministers assigned for buildings to be built.");
@@ -50,6 +54,16 @@
             {
                 __instance.onSlotUnlocked(statType);
             }
+        }
+
+        [HarmonyPatch(typeof(EmploymentCenterActor), nameof(EmploymentCenterActor.OnTick)), HarmonyPostfix]
+        public static void OnTick_Postfix(EmploymentCenterActor __instance)
+        {
+            if (__instance.Nuggets == null || __instance.Nuggets.Count > 0)
+                return;
+
+            if (!__instance._isWorking)
+                __instance.Planet.SettlementController.AutoAssignNugget(__instance, null);
         }
 
         [HarmonyPatch(typeof(EmploymentCenterActor), nameof(EmploymentCenterActor.UpdateMinistersSystem)), HarmonyPrefix]
