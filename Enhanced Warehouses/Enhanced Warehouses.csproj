@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>Enhanced_Warehouses</AssemblyName>
+		<RootNamespace>Enhanced_Warehouses</RootNamespace>
+		<Product>Enhanced Warehouses</Product>
+		<Description>Change Me!</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+	
+</Project>

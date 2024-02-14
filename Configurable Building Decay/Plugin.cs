@@ -23,7 +23,7 @@ public class Plugin : BaseUnityPlugin
 
         // Plugin settings
         // Decay rate 0 = no decay 100 = default decay 200 = double decay etc
-        _decayRate = Config.Bind(MyPluginInfo.PLUGIN_NAME, "DecayRate", 100, "Decay rate 0 = no decay 100 = default decay 200 = double decay etc");
+        _decayRate = Config.Bind("General", "DecayRate", 100, "Decay rate 0 = no decay 100 = default decay 200 = double decay etc");
 
         // Harmony patching
         Harmony.CreateAndPatchAll(typeof(Plugin), MyPluginInfo.PLUGIN_GUID);

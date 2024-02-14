@@ -27,11 +27,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EraChangeConfirmationRemova
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neverwinter", "Neverwinter\Neverwinter.csproj", "{6B943F61-A3A5-4573-80DC-82655ADFD3A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiantHugePlanets", "GiantHugePlanets\GiantHugePlanets.csproj", "{12B694D1-13B4-4498-A7BD-7E00B8E3F32C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inexhaustible Unobtanium", "Inexhaustible Unobtanium\Inexhaustible Unobtanium.csproj", "{EB3642B8-2AB6-44C7-AA43-4A598D9CC948}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speed", "Speed\Speed.csproj", "{BC184243-1BC9-4194-8639-A0BFD5C8FECD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnhancedGraveyards", "EnhancedGraveyards\EnhancedGraveyards.csproj", "{8F062B60-A496-4A17-9E2E-70667998B616}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enhanced Warehouses", "Enhanced Warehouses\Enhanced Warehouses.csproj", "{77AB09C1-F324-4C6D-B37F-475B55DBF52A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enhanced Observatory", "Enhanced Observatory\Enhanced Observatory.csproj", "{1B5579B5-2F3F-4285-A99F-00128D57BF22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,10 +79,6 @@ Global
 		{6B943F61-A3A5-4573-80DC-82655ADFD3A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B943F61-A3A5-4573-80DC-82655ADFD3A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B943F61-A3A5-4573-80DC-82655ADFD3A9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12B694D1-13B4-4498-A7BD-7E00B8E3F32C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12B694D1-13B4-4498-A7BD-7E00B8E3F32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12B694D1-13B4-4498-A7BD-7E00B8E3F32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12B694D1-13B4-4498-A7BD-7E00B8E3F32C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB3642B8-2AB6-44C7-AA43-4A598D9CC948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EB3642B8-2AB6-44C7-AA43-4A598D9CC948}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB3642B8-2AB6-44C7-AA43-4A598D9CC948}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -87,6 +87,18 @@ Global
 		{BC184243-1BC9-4194-8639-A0BFD5C8FECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC184243-1BC9-4194-8639-A0BFD5C8FECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC184243-1BC9-4194-8639-A0BFD5C8FECD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F062B60-A496-4A17-9E2E-70667998B616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F062B60-A496-4A17-9E2E-70667998B616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F062B60-A496-4A17-9E2E-70667998B616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F062B60-A496-4A17-9E2E-70667998B616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77AB09C1-F324-4C6D-B37F-475B55DBF52A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77AB09C1-F324-4C6D-B37F-475B55DBF52A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77AB09C1-F324-4C6D-B37F-475B55DBF52A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77AB09C1-F324-4C6D-B37F-475B55DBF52A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B5579B5-2F3F-4285-A99F-00128D57BF22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B5579B5-2F3F-4285-A99F-00128D57BF22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B5579B5-2F3F-4285-A99F-00128D57BF22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B5579B5-2F3F-4285-A99F-00128D57BF22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

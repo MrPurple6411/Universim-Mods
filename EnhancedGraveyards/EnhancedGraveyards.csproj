@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>EnhancedGraveyards</AssemblyName>
+		<RootNamespace>EnhancedGraveyards</RootNamespace>
+		<Product>Enhanced Graveyards</Product>
+		<Description>Adds multiple options to enhance the cemeteries.</Description>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+	
+</Project>

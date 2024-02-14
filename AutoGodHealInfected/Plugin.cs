@@ -28,9 +28,9 @@ public class Plugin : BaseUnityPlugin
         Logger = base.Logger;
 
         // Configuration
-        DisableInfection = Config.Bind(MyPluginInfo.PLUGIN_NAME, "Disable Infection", false, "Disable infection of citizens");
-        DisableInjury = Config.Bind(MyPluginInfo.PLUGIN_NAME, "Disable Injury", false, "Disable injury of citizens");
-        DisableAging = Config.Bind(MyPluginInfo.PLUGIN_NAME, "Disable Aging", false, "Disable aging of citizens");
+        DisableInfection = Config.Bind("General", "Disable Infection", false, "Disable infection of citizens");
+        DisableInjury = Config.Bind("General", "Disable Injury", false, "Disable injury of citizens");
+        DisableAging = Config.Bind("General", "Disable Aging", false, "Disable aging of citizens");
 
         // Harmony patching
         Harmony.CreateAndPatchAll(typeof(Plugin), MyPluginInfo.PLUGIN_GUID);

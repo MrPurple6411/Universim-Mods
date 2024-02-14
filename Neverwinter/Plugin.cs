@@ -18,7 +18,7 @@ public class Plugin : BaseUnityPlugin
     {
         Logger = base.Logger;
 
-        SkipCostsCP = Config.Bind(MyPluginInfo.PLUGIN_NAME, "Skip Costs CP", false, "Does the auto skip cost the normal creator points charge?");
+        SkipCostsCP = Config.Bind("General", "Skip Costs CP", false, "Does the auto skip cost the normal creator points charge?");
 
         // Harmony patching
         Harmony.CreateAndPatchAll(typeof(Plugin), MyPluginInfo.PLUGIN_GUID);

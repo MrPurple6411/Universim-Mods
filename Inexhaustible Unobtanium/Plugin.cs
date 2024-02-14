@@ -3,6 +3,7 @@
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using ForeignPlanetSimulation;
 using Game;
 using Game.Actors.Urban.Buildings;
 using HarmonyLib;
@@ -29,7 +30,7 @@ public class Plugin : BaseUnityPlugin
         Logger = base.Logger;
 
         // Config
-        CycleSpeedMultiplier = Config.Bind(MyPluginInfo.PLUGIN_NAME, "Cycle Speed Multiplier", DefaultMultiplier, "Multiplier for the cycle speed of the unobtanium extractor.");
+        CycleSpeedMultiplier = Config.Bind("General", "Cycle Speed Multiplier", DefaultMultiplier, "Multiplier for the cycle speed of the unobtanium extractor.");
 
         // Harmony patching
         Harmony.CreateAndPatchAll(typeof(Plugin), MyPluginInfo.PLUGIN_GUID);
@@ -73,5 +74,15 @@ public class Plugin : BaseUnityPlugin
             __instance._currentCycleTime = __instance._cyclePeriod * currentPercentage;
         }
         Actors.Add(__instance);
+    }
+
+    [HarmonyPatch(typeof(ForeignUnobtaniumExtractor), nameof(ForeignUnobtaniumExtractor.ProduceUnobtanium)), HarmonyPostfix]
+    public static void ProduceUnobtanium_Postfix(ForeignUnobtaniumExtractor __instance)
+    {
+        if (!__instance._isProducing)
+            return;
+
+        __instance._completedBatches--;
+        __instance._remainingBatches++;
     }
 }

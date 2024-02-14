@@ -1,16 +1,20 @@
-﻿namespace Managers_Unleashed
+﻿using System.Linq;
+
+namespace Managers_Unleashed
 {
     using BepInEx;
     using BepInEx.Configuration;
     using BepInEx.Logging;
     using Game;
     using Game.Actors;
+    using Game.Actors.Pawns;
     using Game.Actors.Stats;
     using Game.Actors.Urban.Buildings;
     using Game.Configs;
     using Game.Planet;
     using Game.UI;
     using HarmonyLib;
+    using System;
     using System.Collections.Generic;
     using System.Text;
     using UnityEngine;
@@ -20,8 +24,12 @@
     public class Plugin : BaseUnityPlugin
     {
         internal static new ManualLogSource Logger { get; private set; }
-        internal static ConfigEntry<bool> needMinistersAssigned;
-        internal static ConfigEntry<bool> autoUpgradeBuildings;
+        internal static ConfigEntry<bool> NeedMinistersAssigned { get; private set; }
+        internal static ConfigEntry<bool> AutoUpgradeBuildings { get; private set; }
+        internal static ConfigEntry<bool> AutoAssignGovenor { get; private set; }
+
+        // auto assign ministers configs
+        internal static readonly Dictionary<BuildingStatType, ConfigEntry<bool>> AutoAssignMinisters = new Dictionary<BuildingStatType, ConfigEntry<bool>>();
 
         private void Awake()
         {
@@ -30,8 +38,15 @@
 
             Logger = base.Logger;
 
-            needMinistersAssigned = Config.Bind("General", "NeedMinistersAssigned", true, "Need ministers assigned for buildings to be built.");
-            autoUpgradeBuildings = Config.Bind("General", "AutoUpgradeBuildings", false, "Automatically upgrade buildings when possible.");
+            NeedMinistersAssigned = Config.Bind("General", "Need Ministers Assigned", true, "Need ministers assigned for buildings to be built.");
+            AutoUpgradeBuildings = Config.Bind("General", "Auto Upgrade Buildings", false, "Automatically upgrade buildings when possible.");
+            AutoAssignGovenor = Config.Bind("Auto Assign Nugget", "Governor", true, "Automatically assign governor to the settlement if noone is assigned.");
+            
+            foreach (BuildingStatType ministerSlot in from statType in Enum.GetValues(typeof(BuildingStatType)) as BuildingStatType[] where statType.ToString().Contains("MinisterOf") select statType)
+            {
+                string MinisterName = $"MinisterJob/{ministerSlot.ToString().ToUpper()}".TranslateText();
+                AutoAssignMinisters.Add(ministerSlot, Config.Bind("Auto Assign Nugget", $"{MinisterName}", false, $"Automatically assign {MinisterName} minister to the settlement if noone is assigned."));
+            }
 
             // Harmony patching
             Harmony.CreateAndPatchAll(typeof(Plugin), MyPluginInfo.PLUGIN_GUID);
@@ -56,30 +71,54 @@
             }
         }
 
+        [HarmonyPatch(typeof(EmploymentCenterActor), nameof(EmploymentCenterActor.UpdateMinistersSystem)), HarmonyPrefix]
+        public static bool UpdateMinistersSystem_Prefix(EmploymentCenterActor __instance, float timeDelta)
+        {
+            if (NeedMinistersAssigned.Value)
+            {
+                if (__instance.Planet.SettlementController.AssignedNuggetPercentage >= __instance.AutoAssignPercentage || __instance.AllMinisterSlotsFilled())
+                {
+                    return true;
+                }
+
+                foreach (var ministerSlot in AutoAssignMinisters)
+                {
+                    int index = __instance.ministersSlotsTypes.IndexOf(ministerSlot.Key);
+
+                    if (index == -1 || !ministerSlot.Value.Value)
+                        continue;
+
+                    if (__instance._ministersSlots[index] != null)
+                        continue;
+
+                    NuggetActor nuggetAvailableForAutoAssign = __instance.Planet.SettlementController.GetNuggetAvailableForAutoAssign(__instance, null);
+                    if (nuggetAvailableForAutoAssign != null && __instance.OnAssignMinisterNuggetChoosed(nuggetAvailableForAutoAssign, ministerSlot.Key))
+                    {
+                        Logger.LogInfo($"Auto assigned {nuggetAvailableForAutoAssign.Name} as {$"MinisterJob/{ministerSlot.Key.ToString().ToUpper()}".TranslateText()}");
+                    }
+                }
+
+                return true;
+            }
+
+            __instance.ministersSlotsTypes.ForEach(x => __instance.ministersSystem.UpdateTimer(x, timeDelta));
+            return false;
+        }
+
         [HarmonyPatch(typeof(EmploymentCenterActor), nameof(EmploymentCenterActor.OnTick)), HarmonyPostfix]
         public static void OnTick_Postfix(EmploymentCenterActor __instance)
         {
-            if (__instance.Nuggets == null || __instance.Nuggets.Count > 0)
+            if (__instance.Nuggets == null || __instance.Nuggets.Count > 0 || !AutoAssignGovenor.Value)
                 return;
 
             if (!__instance._isWorking)
                 __instance.Planet.SettlementController.AutoAssignNugget(__instance, null);
         }
 
-        [HarmonyPatch(typeof(EmploymentCenterActor), nameof(EmploymentCenterActor.UpdateMinistersSystem)), HarmonyPrefix]
-        public static bool UpdateMinistersSystem_Prefix(EmploymentCenterActor __instance, float timeDelta)
-        {
-            if (needMinistersAssigned.Value)
-                return true;
-
-            __instance.ministersSlotsTypes.ForEach(x => __instance.ministersSystem.UpdateTimer(x, timeDelta));
-            return false;
-        }
-
         [HarmonyPatch(typeof(BuildingActor), nameof(BuildingActor.OnTick)), HarmonyPostfix]
         public static void OnTick_Postfix(BuildingActor __instance)
         {
-            if (!autoUpgradeBuildings.Value || !__instance.IsUpgradeReady)
+            if (!AutoUpgradeBuildings.Value || !__instance.IsUpgradeReady)
                 return;
 
             __instance.UpgradeBuilding();
@@ -90,9 +129,9 @@
         }
 
         [HarmonyPatch(typeof(Messages), nameof(Messages.MinisterBuildingMessage)), HarmonyPrefix]
-        public static bool MinisterBuildingMessage_Prefix(Messages __instance, BuildingStatType ministerSlot, ConstructionSiteActor building, NewsConfig.Data.Trigger trigger)
+        public static bool MinisterBuildingMessage_Prefix(Messages __instance, ref BuildingStatType ministerSlot, ConstructionSiteActor building, NewsConfig.Data.Trigger trigger)
         {
-            if (needMinistersAssigned.Value)
+            if (NeedMinistersAssigned.Value)
                 return true;
 
             Dictionary<string, GameObject> dictionary = new Dictionary<string, GameObject>();

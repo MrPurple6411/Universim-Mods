@@ -6,7 +6,6 @@ using BepInEx.Logging;
 using Game;
 using HarmonyLib;
 using System.Diagnostics;
-using System.Text;
 using UnityEngine;
 
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
@@ -14,8 +13,8 @@ public class Plugin : BaseUnityPlugin
 {
     internal static new ManualLogSource Logger { get; private set; }
 
-    private static ConfigEntry<bool> _inexhaustibleResources;
-    private static ConfigEntry<bool> _abundantResources;
+    internal static ConfigEntry<bool> _inexhaustibleResources { get; private set; }
+    internal static ConfigEntry<bool> _abundantResources { get; private set; }
 
     private void Awake()
     {
@@ -24,14 +23,14 @@ public class Plugin : BaseUnityPlugin
 
         Logger = base.Logger;
 
-        _inexhaustibleResources = Config.Bind("General", "InexhaustibleResources", true, "Inexhaustible resources (Makes it so resources never run out)");
-        _abundantResources = Config.Bind("General", "AbundantResources", false, "Abundant resources (Makes it so planets have HUGE quantities of resources)");
+        _inexhaustibleResources = Config.Bind("General", "Inexhaustible Resources", true, "Inexhaustible resources (Makes it so resources never run out)");
+        _abundantResources = Config.Bind("General", "Abundant Resources", false, "Abundant resources (Makes it so planets have HUGE quantities of resources)");
 
         // Harmony patching
         Harmony.CreateAndPatchAll(typeof(Plugin), MyPluginInfo.PLUGIN_GUID);
 
         // Plugin startup logic
-        Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
+        Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} is loaded!");
     }
 
     // Prefix to make resources abundant

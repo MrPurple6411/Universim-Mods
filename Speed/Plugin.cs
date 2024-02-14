@@ -38,7 +38,7 @@ public class Plugin : BaseUnityPlugin
     [HarmonyPatch(typeof(NuggetSpeedStat), MethodType.Constructor, new System.Type[] { typeof(StageActor), typeof(int) }), HarmonyPostfix]
     public static void Constructor_Prefix(NuggetSpeedStat __instance, StageActor statOwner, int statType)
     {
-        if (statOwner is not CitizenActor citizenActor || citizenActor.IsExiled)
+        if (statOwner is not DroneActor droneActor ? (statOwner is not CitizenActor citizenActor || citizenActor.IsExiled) : droneActor.IsAlien)
             return;
 
         __instance.SetBase(__instance.Max);
@@ -183,5 +183,27 @@ public class Plugin : BaseUnityPlugin
     public static void OnTick_Prefix(WellActor __instance)
     {
         __instance._refillTimer = __instance._statsSheet.SecondsPerOneDrinkingWater;
-    }    
+    }
+
+    // nuggetoid factory instant production.
+    [HarmonyPatch(typeof(DroneFactoryActor), nameof(DroneFactoryActor.OnTick)), HarmonyPrefix]
+    public static void OnTick_Prefix(DroneFactoryActor __instance)
+    {
+        __instance._productionProgress = __instance.StatSheet.BatchTime;
+    }
+
+    // DroneFactoryActor.FinishDrone doesn't reduce ToBeProducedCount
+    [HarmonyPatch(typeof(DroneFactoryActor), nameof(DroneFactoryActor.FinishDrone)), HarmonyPostfix]
+    public static void FinishDrone_Prefix(DroneFactoryActor __instance)
+    {
+        __instance.ToBeProducedCount++;
+    }
+
+    // DroneFactoryActor.MaxDronesFromCurrentResources is always 6
+    [HarmonyPatch(typeof(DroneFactoryActor), nameof(DroneFactoryActor.MaxDronesFromCurrentResources)), HarmonyPrefix]
+    public static bool MaxDronesFromCurrentResources_Prefix(DroneFactoryActor __instance, ref int __result)
+    {
+        __result = 6;
+        return false;
+    }
 }
